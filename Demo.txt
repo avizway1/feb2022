@@ -1,0 +1,349 @@
+D: 09/02/2022
+
+Web Services		: 2003 (SQS : Chris Pinkman and benjamin Black)
+AWS Oficially launched	: March 2006 (S3, ec2, sqs)
+
+Andy Jessy : Amazon CEO
+Adam Selipsky : AWS CEO
+
+Annual conference : AWS Re:Invent (Nov - Dec)
+
+
+AWS vs Azure Vs GCP		: Yes
+
+==============
+
+Region : Geo Location / Physical location.. 25 regions across the globe at movement. 
+Every region contains multiple AZs.. 
+
+Mumbai : ap-south-1 : 3 AZs
+Hyd : ap-south-2 : 3 AZs
+
+
+Availability Zones / AZ : Data Center or combination of multiple DCs..  THis is the place all physical resources exists (Network, Storage, Databases, servers)
+81 AZs.. 
+
+Mumbai : ap-south-1 : 3 AZs : ap-south-1a, ap-south-1b, ap-south-1c
+
+Edge location / PoP (point of Presence) : 330+ : CDN (Content Delivery Network) : Cloudfront
+
+
+
+D: 10/02/2022
+
+Demo: 01 ( 09-02-2022)
+Video Link: shorturl.at/nA028
+Password:  1e=QbbrC
+
+
+AWS Free Tier Limitations : https://aws.amazon.com/free
+
+S3 : 5 gb standard storage, 2000 PUT, 20,000 GET Requests : We can configure alerts.. 
+ec2 : 750 Hrs/Month windows & Linux.. 24x31 = 744 Hrs..  
+	1 windows Server x 1 Month = Free
+	1 linux Server x 1 Month = Free
+
+route53 : DNS : 0.50$ HZ/Month.. 
+
+_________________________________________________
+
+IAM : Identity and Access Management : User Management in AWS.. 
+	--> root : Highest permissions user
+	--> IAM User : We can limit users wrt job roles.
+
+S3 : Simple Storage Service : Storage service in AWS.. 
+	--> We can store any format data. 
+	--> AWS Version of Google Drive / DropBox / ICloud
+	--> We store data in "Bucket". Object size : Min : 0 bytes.. Max: 5 TB
+
+EC2 : Elastic Compute Cloud : We launch and run servers.. (Server = Instance = Azure VM =  Compute Engine)
+	--> Launch Instance, Storage, Scaling
+	--> Load Balancer, Auto Scaling group
+	--> CLI, Roles
+
+VPC : Virtual private Cloud : Network configuration in AWS.. 
+	--> What is IP Addr, Public Ip, private IP, IPv4, IPv6.. Subnet Calc.. 	
+	--> CUstom Network
+	--> Public, Private
+
+1 tier : monolithic 
+2 tier : web, db
+3 tier : web, app, db
+
+RDS : Relational Database Service : mysql, mssql, oracle, postgre, maridb and Amazon aurora.. DynamoDB, Amazon Redshift, DMS, DAX, Elasticache.. 
+
+Route53 : DNS Service.. 
+
+Security : Cloudtrail, config, WAF, ACM, Shield, Inspector, Cloudfront
+Monitoring : Cloudwatch
+Application : SNS, SES, SQS, Lambda, Cloudformation, Cloud9, CDK, CICD
+
+
+______________________________________________________________________________________
+
+D: 11/02/2022
+
+https://aws.amazon.com/free
+
+Step 1 : 
+Email address	: Valid email address.. 	: Root User  	
+Password 	: Strong and secure password
+AWS account name: Production Account, UAT Account
+
+Prod Acc
+UAT Acc
+SQA Acc
+DEV Acc
+Sandbox
+client 1 Acc
+Client 2 Acc
+
+Step 2 : Contact Information:
+Business - for your work, school, or organization
+Personal - for your own projects
+
+Name, Contact, Address, zipcode			
+
+Step 3 : Billing Information
+
+Visa/ MasterCard/ AMEX/ Discovery : CC/DC
+Mastro/rupay : AWS Won't accept
+
+2 INR / $1 USD : refund back 2-3 Days.. 
+
+Step 4 : Verify our Identity
+
+--> Phone verification	: enter 10 digit ph --> call me now --> answer call --> XXXX on your screen --> Enter XXXX pin call --> Identity verification completes
+--> SMS/EMail verification : Ph Number --> Send SMS --> Email/sms --> Enter Pin --> Identity verification completes
+
+Step 5 : Choose Support Plan (SP)	: Basic SP
+
+1. Account and Billing related : 24x7, For all SP
+2. Service Limit increase : 24x7, For all SP
+3. Technical Assistance : Depends on SP
+
+Basic SP : Free.. 1 & 2 Included.. No technical Assistance (3)..  AWS Developer Forums / Knowledge Base Articles
+--> Trusted Advisor : Basic Suggestion
+
+Developer SP : 29$/Month.. 1 & 2 Included.. 
+3 --> Email Support.. 12-24 Local business hours (8AM - 8PM).. Cloud support associate.. 
+
+--> Trusted Advisor : Basic Suggestion
+--> One User (root) can raise ticket, We can raise Unlimited tickets..
+Case Severity : 
+General Guidance : < 24 hrs
+System Impaired : < 12 Hrs
+
+
+Business SP : 100$/Month.. 1 & 2 Included.. 
+3 --> Phone, chat and Email Support.. 24x7 support.. Cloud support engineer.. 
+
+--> Trusted Advisor : Full Checks
+--> Any user can raise ticket, We can raise Unlimited tickets..
+Case Severity : 
+General Guidance : < 24 hrs
+System Impaired : < 12 Hrs
+production system impaired : < 4 Hrs
+production System Down : < 1 hr
+
+Enterprise SP : 15,000 $/Month.. 1 & 2 Included.. 
+3 --> Phone, chat and Email Support.. 24x7 support.. Sr. Cloud support engineer.. 
+
+--> Trusted Advisor : Full Checks
+--> Any user can raise ticket, We can raise Unlimited tickets..
+--> Dedicated TAM (Technical Account Manager)
+--> Annual Architectural Reviews and operational Reviews.. 
+--> Trainings
+
+Case Severity : 
+General Guidance : < 24 hrs
+System Impaired : < 12 Hrs
+Production system impaired : < 4 Hrs
+Production System Down : < 1 hr
+Business critical system down : < 15 Min
+
+___________________________________________________________________________________
+
+FREEAVI
+
+https://www.udemy.com/course/linuxwithavinash/?couponCode=FREEAVI
+
+https://www.udemy.com/course/jenkinswithavinash/?couponCode=FREEAVI
+
+https://www.youtube.com/watch?v=rtI26X6FJX0&list=PLneBjIzDLECkdgoinrTO7D519zgPEmcte
+
+________________________________________________________________________________________
+
+D: 14/02/2022
+
+
+Account --> Billing preferences --> Receive Free Tier Usage Alerts --> ENter your email address.
+
+Receive Free Tier Usage Alerts
+
+Virtual MFA device : Smart phones
+U2F security key
+Hardware MFA device : 
+
+
+root user credentials : ..??		: 
+
+User 1 : TL : He need access on all services : 		IAM User with Admin access
+user 2 : Storage Admin : s3 : 				IAM user with s3 full access
+user 3 : Compute Admin : ec2 : 				IAM user with Ec2 full access
+
+closed your aws account..???? 
+
+IAM User : Identity and access management : 
+
+Least Privilages mechanism : Provide permissions to perform his allocated job roles/activities. 
+
+________________________________________________
+
+http://aws.amazon.com/console / aws.com
+
+root user : Whenever we are using email id to login to our aws acc, We call him as root user.  Root user will have unrestricted access on our account. 
+
+
+IAM user : Identity and Access Management : 
+
+1 : TL : IAM User with Administrator access : UN, Pwd
+2 : Storage : IAM User with S3 Full access : UN, Pwd
+3 : Compute : IAM User with EC2 Full access : UN, Pwd
+
+
+Username : s3user
+Access Type : 
+--> Programatic Access : AccessKey ID and Secret Access Key : cli, api, cdk, 3rd party
+--> Management Console : Username, Password and Sign-in : Browser
+
+--> Autogenerated Pwd / CUstom password.. 
+--> ENforce user to create a new password when login first time. 
+
+Allocate Permissions : 
+--> Group level : Create a group, allocate permissions at group level and ass user to group.
+--> Copy permissions from an Existing user. 
+--> Allocate permissions on user. 
+
+Policy : Document that contains set of permissions on AWS environment. 
+
+Add Tags: Adding metadata. (Optional)
+
+Review and Create user. 
+
+
+Dashboard --> Account settings --> Password policy
+This AWS account uses the following custom password policy:  	
+Minimum password length is 8 characters
+Require at least one uppercase letter from Latin alphabet (A-Z)
+Require at least one lowercase letter from Latin alphabet (a-z)
+Require at least one number
+Require at least one non-alphanumeric character (! @ # $ % ^ & * ( ) _ + - = [ ] { } | ')
+Password expires in 60 day(s)
+Allow users to change their own password
+Remember last 3 password(s) and prevent reuse
+
+root user : He can perform everything
+IAM user with Admin access : He can perform everything, Except Account management and Billing management.
+
+
+Demo: 01 ( 09-02-2022)
+Video Link: shorturl.at/nA028
+Password:  1e=QbbrC
+  
+Demo: 02 ( 10-02-2022)
+Video Link: shorturl.at/zBEH6
+Password:  5j++4a^y
+   
+Demo: 03 ( 11-02-2022)
+Video Link: shorturl.at/hsvzX
+Password:  7&Nd#H&!
+    
+Demo: 04 ( 14-02-2022)
+Video Link: shorturl.at/kwOP9
+Password:  b4+K6T7&
+
+Yesterdays Video : 
+
+
+arn : Amazon resource name : 
+
+
+Task : Create an IAM user, Provide "S3 Full Access"to this IAM user. Loging as IAM user and verify his access on s3 platform.
+
+Task 2 : Create an IAM user, Provide "Administrator Access" to this IAM user. Loging as IAM user and verify his access.
+
+________________________________________________________________________________________
+
+D: 16/02/2022
+
+Policy : Set of permissions. Writtens in JSON format. 
+
+AWS Managed POlicy - Job FUnction : Based on standard industry job, AWS provided these polocies. We cannot delete these policies.
+
+AWS Managed POlicy : Based on aws services, we will get these polocies. We cannot delete these policies.
+
+Customer Managed Policy : We can create polocies, based on our requirement. 
+
+
+Scenario 1 : Need an IAM user with Only S3 full Access.!!
+
+Scenario 2 :Need an IAM user with Full access on AWS Environment, But not on "S3". 
+		(Except s3, need to provide all services access)
+
+Create an IAM user with "AdministratorAccess" and "Deny S3" Policy.
+
+--> Deny will always have highest priority.  You allowed 100 times, but denied only one time : DENY will take effect..!!
+
+
+Service : S3 / ec2	: S3
+
+Actions : Allow / Deny	: Deny
+			: All Actions	(List/Read/Write)
+
+Resources : Apply to all resources. 	(Limit bucket / Server)
+
+
+
+An IAM user, need to work only in one specific region, THen we can add below condition. 
+
+           "Condition": {
+                "ForAllValues:StringEquals": {
+                    "aws:RequestedRegion": "ap-south-1"
+___
+
+   "Condition": {
+	 "NotIpAddress": {"aws:SourceIp": "124.123.184.186/32"}
+
+____
+
+Policy simulator : The simulator evaluates the policies that you choose and determines the effective permissions for each of the actions that you specify.
+
+
+arn : Amazon Resource Name : arn:aws:iam::501170960000:user/UserName
+
+Password Policy : A password policy is a set of rules that define the type of password an IAM user can set.
+
+________________________________________
+
+Task 1 : Create an IAM user, Provide him "AdministratorAccess". Try to access Billing console.!!! Yes/No.??
+How we can provide billing console access to the User.!!
+
+Task 2 : Create an IAM user, Who can access EC2 Resources only from "Mumbai Region". Login and test his access on Mumbai, another region should show error.
+
+Task 3 : Create an IAM user allocate "administrator access", Create policy to "Deny * in S3 and EC2", Allocate to the IAM user.. Login as IAM User and Test his access on S3/ec2/iam.
+Use Policy SImulator to Simulate his permissions to "Create S3 Bucket".
+
+______
+
+
+https://join.slack.com/t/awswithavinash/shared_invite/zt-ozg7f9gx-lGdrFMlaOAc_BiPl4V~f4w
+
+
+
+
+
+
+
+
+
