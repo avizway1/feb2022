@@ -336,8 +336,35 @@ Use Policy SImulator to Simulate his permissions to "Create S3 Bucket".
 
 ______
 
-
 https://join.slack.com/t/awswithavinash/shared_invite/zt-ozg7f9gx-lGdrFMlaOAc_BiPl4V~f4w
+
+https://github.com/avizway1/feb2022
+
+______________________________________________________________________________________________________
+
+D: 17/02/2022
+
+Permissions boundary : Set a permissions boundary to control the maximum permissions this user can have.
+
+Cloudtrail : Logging service. (Management logs, Data logs and insight events)
+--> Enabled by defaultly. We cannot disable. 
+--> It stores last 90 days activites only. 
+--> We can store logs in s3 bucket / cw logs group for unlimited days. 
+
+
+Task : Create an IAM user, provide him "S3 full access". ALong with s3, He should be able to list,  enable/disable MFA himself. Login as IAM user and try to activate MFA. 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

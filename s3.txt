@@ -1,0 +1,44 @@
+S3 : Simple Storage Service : 
+
+
+block based storage : Designed to run OS.. : EBS, Instance store volumes
+network based / storage over network : EFS, FSx
+object based storage : flat files	: GDrive, Onedrive, icloud, S3
+
+
+Database : db engine : mysql, mssql, postgresql, oracle : Schema : Tables.. Store information
+Login to gmail : Username and password :
+
+
+--> S3 is a global service. Doesn;t required region selection.
+--> We store data in "BUCKETS"
+--> Bucket names should be unique across the globe. 
+--> Defaultly, We can create 100 buckets. Soft limit, Raise a ticket and aws will increase the capacity. 
+--> We can store unlimited data in s3 bucket. 
+--> No preprovisioning required. 
+
+--> Bucket naming limitations : 
+	--> Min char 3, Max : 63 char
+	--> Bucket name should be in small char, numeric, - supports
+	--> Bucket name should not start with . should not end with . 
+	--> No adjesent ..
+	--> Bucket name should not resemble with IP address format. (192.168.100.1)
+	
+--> We need to choose region while creating bucket. Our data physically resides in that regions infra.
+
+--> We can upload "objects" to s3 buckets.
+--> Min Obj size is 0 bytes. Max obj size is 5 TB.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
