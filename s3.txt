@@ -1,14 +1,11 @@
 S3 : Simple Storage Service : 
 
-
 block based storage : Designed to run OS.. : EBS, Instance store volumes
 network based / storage over network : EFS, FSx
 object based storage : flat files	: GDrive, Onedrive, icloud, S3
 
-
 Database : db engine : mysql, mssql, postgresql, oracle : Schema : Tables.. Store information
 Login to gmail : Username and password :
-
 
 --> S3 is a global service. Doesn;t required region selection.
 --> We store data in "BUCKETS"
@@ -25,20 +22,164 @@ Login to gmail : Username and password :
 	--> Bucket name should not resemble with IP address format. (192.168.100.1)
 	
 --> We need to choose region while creating bucket. Our data physically resides in that regions infra.
-
 --> We can upload "objects" to s3 buckets.
 --> Min Obj size is 0 bytes. Max obj size is 5 TB.
 
+_____________________________________________________________________________________________________
+
+D: 18/02/2022
+
+https://s3.ap-south-1.amazonaws.com/bucketname/objectname
+https://bucketname.s3.ap-south-1.amazonaws.com/objectname (virtual path)
+https://bucketname.s3.amazonaws.com/objectname (virtual path)
+
+Virtual paths won't work if we have . in bucket names.
+
+Block Public Access settings for this account : Account Level Blocking
+Block public access (bucket settings) : Bucket level Blocking
+
+==> Enable Bucket ACLs. (Bucket --> permissions --> Object Ownership --> ACLs enabled --> Save)
+--> We should make an object public, then only Object URLs works.
+
+S3 Free Tier ELigibility : 
+5 GB "Standard Storage"
+--> 2000 PUT / 20,000 GET
+
+--> Where to monitor free tier limitation.?
+Billing Dashboard --> Cost Management Preferences --> Receive Free Tier Usage Alerts. 
+--> https://console.aws.amazon.com/billing/home?region=ap-south-1#/freetier
+
+--> How to get alert whe you are exceeding free tier/ if any service is costing us..? 
+
+Enable Receive Billing Alerts -->  Manage Billing Alerts --> CloudWatch console
+
+S3 Storage Classes : 
+____________________
+
+--> S3 Standard : Defualt storage class for all the data we upload to s3. Data will be available immedeatly.
+Designed to store : Frequently accessed data. 
+Availability : 99.99%,  Durability: 99.999999999 (11 9's)
+Data replicates across : >= 3 AZs
+
+--> Standard-IA : Data will be available immedeatly. Designed to store : infrequently accessed data
+Avai : 99.9%, Durability : 99.999999999 (11 9's) 
+Data replicates across : >= 3 AZs
+
+--> One Zone-IA : Data will be available immedeatly. Designed to store : infrequently accessed data. Store only non-critical data
+Avai : 99.5 %, Durability : 99.999999999 (11 9's) 
+Data replicates across : 1 AZs
+
+Glacier Instant Retrieval : Long-lived archive data accessed once a quarter with instant retrieval in milliseconds. 
+Avai : 99.99 %, Durability : 99.999999999 (11 9's) 
+Data replicates across : >= 3 AZs
+
+--> Glacier Flexible Retrieval : Long-term data archiving with retrieval times ranging from minutes to hours. Data won't be available immedeatly. We need to initiate a data restration to view the data. Restoration takes (1 min - 5 Hrs)
+Avai : 99.99 %, Durability : 99.999999999 (11 9's) 
+Data replicates across : >= 3 AZs
+
+--> Glacier Deep Archieve : Long-term data archiving with retrieval times ranging from 12 hrs. Data won't be available immedeatly. We need to initiate a data restration to view the data. Restoration takes (5 - 12 Hrs)
+Avai : 99.99 %, Durability : 99.999999999 (11 9's) 
+Data replicates across : >= 3 AZs
+
+..
+S3 Intelligent Tier : If we have unknown access pattern, we can choose. 
+Avai : 99.9 %, Durability : 99.999999999 (11 9's) 
+Data replicates across : >= 3 AZs
+
+RRS : Redused Redundancy Storage : Not Recommanded : Less durability.. 
+Durability : 99.99%, As we have less durability we have high chances to loss the data when compared to another storage classes.
 
 
+S3 Pricing : 
+--> How much data we are storing.
+--> How many GET/PUT operations (uploads/downloaded object count)
+--> Data retrivals
+
+Glacier Flexible data retrival : 
+Bulk retrieval : Typically within 5-12 hours.
+Standard retrieval : Typically within 3-5 hours.
+Expedited retrieval : Typically within 1-5 minutes when retrieving less than 250 MB.
+
+_______________________________________________________________________________________
+
+D: 21/02/2022
+
+Version : AWS maintains multiple copies in s3 bucket. 
+--> Defaultly versioning will be in Suspended state.
+--> When versioning is enabled, If we delete an object
+
+Versioning : HIDE
+--> S3 will show most recent uploaded object only.
+--> We will get a Delete Marker, If we delete an object.
+--> To get object back / undo delete, Set Version to SHOW, Delete the "delete marker".
+
+Versioning : SHOW
+--> If we delete an object, it deletes permanently.
+
+___________________________
 
 
+Life Cycle Management Rule : 
+--> We can apply Rule to entire bucket
+--> We can limit rule to a prefix (Folder)
+--> We can limit rule to objects by specifing a "Tag"
 
 
+S3 Standard --> StandardIA --> Glacier --> Delete
+S3 Standard --> Glacier --> Delete
+S3 Standard --> Delete
+
+___________________________
+
+CRR / SRR : 
+--> Source bucket and destination bucket must be enabled with versioning. 
+--> Existing objects will not replicate to the destination bucket.
+--> All future / subsequent uploads will replicate to destination bucket. 
+
+RTC : Replication time control : Data replicates to destination bucket with in 15 Min. (99.99% of the data) : COST US
+
+___
+Data transfer from One region to another region cost us.
+Data transfer within a region won't cost us anything.
+_______________________
+Task : Create an S3 bucket, Upload some data, Enable versioning.. Upload same data again multiple times.. 
+
+Configure Life cycle management rule to Transit objects from S3 standard to Delete after 3 Days.. Previous versions should delete after 2 days.
+
+___________________________________________________________________________________
+
+CRR / SRR : 
+--> Source bucket and destination bucket must be enabled with versioning. 
+--> Existing objects will not replicate to the destination bucket.
+--> All future / subsequent uploads will replicate to destination bucket. 
+
+RTC : Replication time control : Data replicates to destination bucket with in 15 Min. (99.99% of the data) : COST US
+
+___
+Data transfer from One region to another region cost us.
+Data transfer within a region won't cost us anything.
 
 
+Server access logging : enable logging on bucket.
+
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/LogFormat.html
+
+Cloudtrail : Data events : It allow us to log all s3 activities (Current buckets and future buckets).
+____________
 
 
+Event notifications : 
+
+--> SNS : Simple Notification Service : 1000 EMAILs Free Tier eligibility
+--> SQS : Simple Queue Service
+--> Lambda 
+
+--> Make sure you edit the SNS topic's "Access Policy to everyone".
+____________________________________________________________________________
+
+
+Task : Create a Life cycle management rule to Delete the Latest data after 2 days. 
+Previous versioned object data should be delete after 1 day, when it becomes non current.
 
 
 
