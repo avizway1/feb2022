@@ -212,4 +212,69 @@ Asymmetric : A public and private key pair that can be used for encrypt/decrypt 
 
 KMS Keys, we cannot delete immedeatly. We need to schedule key deletion (Min: 7 Days, Max: 31 Days)
 
-https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html?region=ap-south-1&origBucketName=avinash77avinash
+_____________________________________________________________________________________
+
+D: 24/02/2022
+
+IAMUser-1 : S3FullAccess : Okay to have full access on all resources.
+IAMUser-2 : S3FullAccess : Restrict this user to Delete "tavinash" and restrict "PUT" on "tavinash".
+
+arn : Amazon Resource Name
+
+Effect : ALLOW / DENY : DENY
+
+Principal : For what user/group you want to allow/deny : arn:aws:iam::501170964283:user/user2
+
+Actions : Operations : DeleteBucket , PutObject
+
+Resource arn : on what bucket you want to apply : arn:aws:s3:::avinash.bucket
+
+URL : https://awspolicygen.s3.amazonaws.com/policygen.html
+
+Bucket Level : arn:aws:s3:::avinash.bucket
+Object level : arn:aws:s3:::avinash.bucket/*
+
+
+Task 1 : IAMuser should have access to only one s3 bucket. (Create an IAM policy to list all the bucket, but the iam user should work in only one bucket allocated to him).
+
+user1 --> user1bucket
+user2 --> user2bucket
+
+_____________
+
+Intelligent-Tiering Archive configurations: 
+
+IT Archive Access tier :  Intelligent-Tiering will automatically move objects that haven’t been accessed for a minimum of 90 days to the Archive Access tier.
+
+Deep Archive Access tier : When enabled, Intelligent-Tiering will automatically move objects that haven’t been accessed for a minimum of 180 days to the Deep Archive Access tier.
+
+_______
+
+Event notifications : 
+
+--> SNS : Simple Notification Service : 1000 EMAILs Free Tier eligibility
+--> SQS : Simple Queuq Service
+--> Lambda 
+
+________
+
+Object Lock : 
+--> Versioning must be enabled.
+Permanently allows objects in this bucket to be locked. Additional Object Lock configuration is required in bucket details after bucket creation to protect objects in this bucket from being deleted or overwritten.
+
+Governance : Users with specific IAM permissions can overwrite or delete protected object versions during the retention period.
+
+Compliance : No users can overwrite or delete protected object versions during the retention period.
+
+___________
+
+Cloudwatch : Monitoring service. We can create alarms, Graphs based on resource metrics. 
+
+Storage Class Analysis : Analyze storage access patterns to help you decide when to transition objects to the appropriate storage class.
+
+Inventory configurations : We will get all the objects list with properties.
+
+_____
+
+
+
