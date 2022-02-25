@@ -1,0 +1,42 @@
+Replication Test : 
+
+Account 1 : 
+
+bucketname : avinashreplicasource
+Acc No : 501170964283
+
+
+Account 2 : 
+
+bucketname : avinashreplicadestination
+Acc No : 056642643668
+
+
+Add this on Destination bucket : 
+
+
+{
+   "Version":"2012-10-17",
+   "Id":"",
+   "Statement":[
+      {
+         "Sid":"Set permissions for objects",
+         "Effect":"Allow",
+         "Principal":{
+            "AWS":"arn:aws:iam::501170964283:role/service-role/s3crr_role_for_avinashreplicasource"
+         },
+         "Action":["s3:ReplicateObject", "s3:ReplicateDelete"],
+         "Resource":"arn:aws:s3:::avinashreplicadestination/*"
+      },
+      {
+         "Sid":"Set permissions on bucket",
+         "Effect":"Allow",
+         "Principal":{
+            "AWS":"arn:aws:iam::501170964283:role/service-role/s3crr_role_for_avinashreplicasource"
+         },
+         "Action":["s3:List*", "s3:GetBucketVersioning", "s3:PutBucketVersioning"],
+         "Resource":"arn:aws:s3:::avinashreplicadestination"
+      }
+   ]
+}
+
