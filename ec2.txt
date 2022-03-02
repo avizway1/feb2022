@@ -143,7 +143,94 @@ FREE TIER : 750 Hrs/Month t2.micro windows instance (ondemand)
 1 instance x 24 hrs x 31 days = 744 Hrs 	--> 750 Hrs Free tier
 2 instance x 24 hrs x 16 days = 768 Hrs	
 
+_______________________________________________________________________________________
 
+D: 02/03/2022
+
+Step 4 : CHoose Storage
+
+--> EBS : Elastic Block Storage
+SSD / HDD / Magnetic
+
+General purpose SSD : gp2 / gp3
+Provisioned iops SSD : io1 / io2 / io2blockexpress*
+
+Throughput optimized HDD : st1 : 
+Cold hdd : sc1 
+
+Magnetic : standard
+
+IOPS : Input and Output Operations per second
+
+root Volume : COntains OS : gp2, gp3, io1, io2 and standard/magnetic
+Additional volume : + st1, sc1
+
+General Purpose SSD : (gp2 / gp3) : Low latency interactive applications, Dev and test environment..!!
+Min : 1 GiB, Max: 16 TiB... Max IOPS: 16,000 IOPS
+gp2 --> works 1 : 3 ration (1 gb volume = 3 iops), with min of 100..
+
+for gp3, we have an advantage, we can mention/choose required IOPS count.
+
+__
+
+Provisioned iops : (io1 & io2) : workload that requires Specific IOPS count.. or if we need more than 16,000 iops for our ec2 instance.. I/O Intensive database workloads..
+Min : 4 GiB, Max: 16 TiB... Max IOPS: 64,000 IOPS
+--> It provided highest performance among all. 
+
+io2 Block Express volume : Min : 4 GiB, Max: 64 TiB...
+Supports 256,000 IOPS.. 
+__
+
+Magnetic : Standard : Less freq accessed data, Low cost storage solutions.. 
+Min : 1 GiB, Max: 1 TiB...
+__
+
+Throughput optimized HDD : st1 : Bigdata, Data warehousing, log processing.. 
+Size : Min 125 GiB - 16 TiB.. IOPS : 500.. Throughput : 500 MB/S..
+
+Cold HDD : sc1 : THroughput orientes storages, but with Less Frequently accessed.. Lower cost than st1.. 
+Size : Min 125 GiB - 16 TiB.. IOPS : 250.. Throughput : 250 MB/S..
+
+
+Free Tier : 30 gb Gp2 and standard storage.. 
+
+--> 10% of volume size (or) 5 gb.. WHichever is highest
+
+** Need to perform OS level operations to make additional volumes available.
+--> Disk Management --> diskmgmt.msc --> choose volume --> make it online --> Initilize disk --> SImple volume --> NTFS/FAT --> Create
+
+Windows : FAT, FAT32, NTFS, ReFS
+Linux : ext3, ext4, xfs
+
+
+Instance 1 in ap-south-1a ---> Instance 2 in ap-south-1a ==> Detach from instance 1 and attach to instance 2.. 
+
+Instance 1 in ap-south-1a ---> Instance 2 in ap-south-1b ==> Detach from instance 1 and attach to instance 2 is not possible as both are running in diff AZs.. 
+Choose the volume --> Take a Snapshot --> Create a volume from snapshot, while creating choose ap-south-1b --> we'll get volume in 1b --> Attach to Instance 2 running in ap-south-1b
+
+Instance 1 in Mumbai : ap-south-1a ---> Instance 2 in N Virginia : us-east-1a ==> Detach from instance 1 and attach to instance 2 is not possible as both are running in diff regions.. 
+Choose the volume --> Take a Snapshot --> Copy the snapshot to desired region (NV) 
+--> Create a volume, while creating choose us-east-1a --> volume in 1a --> Attach to Instance 2 running in N Virginia : us-east-1a.
+(Data transfer from region to region cost us)
+
+
+Instance 1 in AWSACC1 : Mumbai : ap-south-1a ---> Instance 2 in AWSACC2 : Mumbai : ap-south-1a ==> Detach from instance 1 and attach to instance 2 is not possible as both are running in diff aws accounts, regions.. 
+Choose the volume --> Take a Snapshot --> share the snapshot to another aws account 
+--> Create a volume, while creating choose ap-south-1a in acc2
+
+Instance 1 volume need to share with everyone.. --> Create a snapshot --> Share to "Public" --> 
+
+
+MultiAttach : https://www.youtube.com/watch?v=2j8R3ajSo3s
+
+
+Task 1 : Launch an ec2 instance in ap-south-1a.. Create a "New volume with 1 gb size" in ap-south-1a and attach this volume to ec2 instance and make it available. Goto AWS console "Increase the volume size to 2 GB", make this 2gb volume available at OS level.
+
+Task 2 : Launch an ec2 instance in ap-south-1a... Another ec2 instance in ap-south-1b..
+Create a volume in ap-south-1a.. Attach it to "1a instance" and make it available.. Write some data into it..
+Make Same volume available to "1b instance"..!!
+
+** We cannot decrease the size of an EBS volume. Only increase is possible.
 
 
 
