@@ -232,6 +232,50 @@ Make Same volume available to "1b instance"..!!
 
 ** We cannot decrease the size of an EBS volume. Only increase is possible.
 
+________________________________________________________________________________________
+
+D: 
+
+EBS VOlumes : Always use EBS volumes only.
+Instance store volumes : We really don't use this in real environments.   (NO FREE TIER ELIGIBILTY)
+	--> Also called as Ephemeral storages (Temporary storage).
+	--> We cannot STOP/Start the instance.
+	--> Storage will be delivered from underlying host/physical resources.
+	--> If required, we can reboot. We don't loss any data.
+	--> If underlying h/w failure happens, we'll loss all the data.
+
+Snapshot : Backup copy of an EBS volume.
+
+https://aws.amazon.com/blogs/storage/automating-amazon-ebs-snapshot-and-ami-management-using-amazon-dlm/
+
+SOP : Standard Operational Procedure : 
+
+DLM : Data Lifecycle manager : Automate the snapshot creation process. 
+--> We use "tags" to filter the resources. 
+
+Default Retention Values: 
+Prod : 14 Days
+Non Prod : 7 Days 
+
+Fast snapshot restore : Enable fast snapshot restore to ensure that volumes created from snapshots created by this policy instantly deliver all of their provisioned performance.
+
+--> Snapshots are point-in-time copies.
+--> Snapshots stores in S3 platform (Not in your s3).
+--> Can we view what data we have inside snapshots..?? NO
+--> Snapshot Works with Incremental backup mechanism. 
+--> If our volume is Encrypted, Snapshot also Encrypts automaticALLY. 
+--> When we are launching a volume from encrypted snapshot, volume also encrypts automatically.
+--> We cannot share an Default Master key Encrypted snapshot.
+--> If we are using Custom encryption key, we can share snapshot with another aws account, but we need to provide permissions on encryption key also to another aws account.
+
+__________
+
+Task 1 : https://aws.amazon.com/blogs/storage/automating-amazon-ebs-snapshot-and-ami-management-using-amazon-dlm/
 
 
+___________
 
+
+Whenever we launch an ec2 instance, 2 status checks will happen. 
+-> System Status check : H/w is healtlhy or not at Physical resource level. (STOP/START)
+-> Instane status check : OS level issues.
