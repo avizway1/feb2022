@@ -336,24 +336,6 @@ Task 2 : Perform some more customisations on the task 1 instance and make it as 
 https://www.udemy.com/course/linuxwithavinash/?couponCode=FREEAVI
 https://www.udemy.com/course/jenkinswithavinash/?couponCode=FREEAVI
 
-
-Whenever we launch an ec2 instance, 2 status checks will happen. 
--> System Status check : H/w is healtlhy or not at Physical resource level. (STOP/START)
--> Instane status check : OS level issues.
-
-Virtulisations : 
-
-Host Based Hypervisor
-Bare metal Hypervisor 
-
-______________
-
-Tenancy in AWS : 
---> Shared Tenancy : Underlying hardware/resources will be shared with multiple AWS customers. 
---> Dedicated Tenancy : Underlying hardware/resources will dedicatedly available to only one AWS customer. It won't share with any other.
-	--> Dedicated Instance : 
-	--> Dedicated Host : Host supports to launch multiple instances. Some applications required physical resources inforamtion to apply the licenses. 
-
 __________________________________________________________________________________
 
 D: 07/03/2021
@@ -435,17 +417,24 @@ sudo su	--> Switch to root user
 exit		--> Exit from root user to ec2-user
 clear		--> Clears the screen
 
-ls		--> List the files/folders
-ls -a	--> List all including hidden files
-pwd		--> Print working directory
+ls			--> List the files/folders
+ls -a		--> List all including hidden files
+pwd			--> Print working directory
 mkdir		--> Create a Directory/Folder
 touch 		--> o bytes file/ plain file
-cd		--> Change directory
+cd			--> Change directory
 
 copy and paste :  cp
 cut and paste  :  mv
 
 to rename a file we use "mv" command :  mv oldfilename newfilename
+
+Task 1 : Launch Amazon Linux 2 Instance, Connect to the instance. 
+Task 2 : https://linuxsurvival.com/  (Complete all modules (first 2 atleast))
+
+__________________________________________________________________________________
+
+D: 08/03/2022
 
 vim / vi / nano
 
@@ -454,9 +443,9 @@ VIM Editor :
 vim filename	--> Open this file in VIM editor
 
 Press I		--> INSERT Mode
-Press ESC	--> ReadOnly Mode
-:wq		--> Write and Quit (Write changes to file and quit the editor)
-:q!		--> Quit the Editor without writing the changes
+Press ESC		--> ReadOnly Mode
+:wq				--> Write and Quit (Write changes to file and quit the editor)
+:q!				--> Quit the Editor without writing the changes
 __
 
 Req: Make this linux Instance as Web Server (Apache).
@@ -474,17 +463,98 @@ path : /var/www/html/
 cd /var/www/html/
 
 Tool to Move the files to amazon linux ec2 instance : WinSCP
-_________________________
+
+___________
+
+Whenever we launch an ec2 instance, 2 status checks will happen. 
+-> System Status check : H/w is healtlhy or not at Physical resource level. (STOP/START)
+-> Instane status check : OS level issues.
+
+Virtulisations : 
+
+Host Based Hypervisor
+Bare metal Hypervisor 
+
+______________
+
+Tenancy in AWS : 
+--> Shared Tenancy : Underlying hardware/resources will be shared with multiple AWS customers. 
+--> Dedicated Tenancy : Underlying hardware/resources will dedicatedly available to only one AWS customer. It won't share with any other.
+	--> Dedicated Instance : 
+	--> Dedicated Host : Host supports to launch multiple instances. Some applications required physical resources inforamtion to apply the licenses. 
 
 
-Task 1 : Launch Amazon Linux 2 Instance, Connect to the instance. 
-Task 2 : https://linuxsurvival.com/  (Complete all modules (first 2 atleast))
+Task 1 : Launch a linux ec2 instance and make it as webserver, deliver the custom webpage. "Use Apache"
+Task 2 : Launch a Linux 2 ec2 instance and make it as webserver using "Nginx". 
+
+______________________________________________________________________________________
+
+D: 
+
+Windows : FAT, FAT32, NTFS, ReFS
+Linux : ext3, ext4, xfs
+
+df	: disk filesystem
+
+grab the name of new volume : /dev/xvdb
+
+lsblk		--> List block based devices
+df -Th		--> List the available volumes
+
+/dev/xvda1	--> root volume (/)
+/dev/xvdf	--> new Volume name 
+
+In windows OS, we mount new volumes to drive letters.. But in Linux OS, We mount volumes to Directory. 
+
+mkdir newvolume
+
+file -s /dev/xvdf  	--> If this command returns with "data", no file system.
+			--> If this returns ext3/xfs filesystem.. We have a file system.
 
 
-Task 3 : Launch a linux ec2 instance and make it as webserver, deliver the custom webpage. "Use Apache"
-Task 4 : Launch a Linux 2 ec2 instance and make it as webserver using "Nginx". 
+mkfs -t xfs /dev/xvdf		--> Make file system and write it to Additonal volume
+
+mount /dev/xvdf newvolume/	--> mount addl volume to directory
+
+--> Above mount is temp mount only.. it won't available after the instance reboot.
+--> To make this volume perm mount to the directory, Add entry in "/etc/fstab" file.
+--> Get the entry information from "/etc/mtab" file. 
+
+--> cat /etc/mtab		--> Grab the entry related to newly added addl volume
+
+/dev/xvdb /home/ec2-user/newvolume xfs rw,relatime,attr2,inode64,noquota 0 0
+
+--> vim /etc/fstab.. Write the above entry, save and quit the editor. (Do not edit the existing entry).
+
+mount -all
+__________
+--> Increase the volume size the "Cosole" first, then execute the below command..!!
+
+We can use "xfsprogs" to increase existing volume size. 
+
+yum install xfsprogs
+
+--> xfs_growfs -d /volume-Mountpoint
+--> xfs_growfs -d /home/ec2-user/newvolume
+
+_______________________
+
+GoldenAMI on Linux : 
+
+How to recover a Linux instance, if we lost Keyapir..!!!
+Ans : Choose the Instance --> Create a GAMI --> Launch from GAMI with New Keypair.
+
+You have an Linux ec2 instance, You lost the keypair of that ec2 instance and you want to recover the instance..?
 
 
+Task 1 : Launch linux ec2 instance with 8gb root volume. Add additional "1 gb" volume to ec2 instance and make it available at OS level. (reboot and test it)
+
+Task 2 : Increase the size of the "1 gb" volume to "2 gb" we used in task 1, make it available.
+
+Task 3 : Install webserver is Linux instance, Create a golden AMI of the linux instance. 
+While launching instance from goldenAMi, In final step, choose a new keypair. try to login to instance with both the keypairs. 
+
+Task 4 : https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html
 
 
 
