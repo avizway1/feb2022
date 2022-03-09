@@ -456,7 +456,7 @@ yum : Yellowdog Update manager
 yum install httpd -y
 service httpd status			--> httpd webserver service status
 service httpd start/stop/restart
-chkconfig httpd on			--> Makes httpd as logon service.
+chkconfig httpd on				--> Makes httpd as logon service.
 
 path : /var/www/html/
 
@@ -489,12 +489,14 @@ Task 2 : Launch a Linux 2 ec2 instance and make it as webserver using "Nginx".
 
 ______________________________________________________________________________________
 
-D: 
+D: 09/03/2022
 
 Windows : FAT, FAT32, NTFS, ReFS
 Linux : ext3, ext4, xfs
 
 df	: disk filesystem
+
+/dev/xvdf --> 1 gb volume
 
 grab the name of new volume : /dev/xvdb
 
@@ -555,6 +557,5 @@ Task 3 : Install webserver is Linux instance, Create a golden AMI of the linux i
 While launching instance from goldenAMi, In final step, choose a new keypair. try to login to instance with both the keypairs. 
 
 Task 4 : https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html
-
-
-
+https://aws.amazon.com/premiumsupport/knowledge-center/new-user-accounts-linux-instance/
+https://baraabytes.com/set-a-new-user-with-password-login-for-aws-ec2-instance/
