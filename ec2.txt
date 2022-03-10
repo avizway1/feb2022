@@ -559,3 +559,73 @@ While launching instance from goldenAMi, In final step, choose a new keypair. tr
 Task 4 : https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html
 https://aws.amazon.com/premiumsupport/knowledge-center/new-user-accounts-linux-instance/
 https://baraabytes.com/set-a-new-user-with-password-login-for-aws-ec2-instance/
+
+________________________________________________________________________________________
+
+D: 10/03/2021
+
+Free Tier : 750 Hrs/Month..  
+
+ec2 instance --> install application --> t2.micro --> Verify the metrics
+
+Cloudwatch : Monitors the resources.. Provides the graphs.. 
+
+Vertical Scaling : Upgrading same instance resources.. t2.micro --> c5.2xlarge
+Horizantal Scaling : Distribute application load to multiple ec2 instances.. 
+
+Classic ELB : Layer 4/7 LB.. : Outdated.. : http, https, tcp, udp.. 
+Application ELB : Layer 7 ELB.. : http and https
+Network ELB : Layer 4 ELB.. : TCP, UDP, TLS 
+Gateway ELB : GENEVE / 3rd party security virtual applicances.. 
+
+**Please select at least two Subnets in different Availability Zones to provide higher availability for your load balancer.
+
+#!/bin/bash
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+echo "<h1>This is my WebServer - 2</h1>" > /var/www/html/index.html
+
+
+For ELBs, We will get DNS Endpoint..
+Roundrobin algorithm.. 
+
+Task : Launch multiple webservers in Multiple AZs... COnfigure the Classic ELB. 
+--> Test the Sticky session
+--> Make sure you configure Pipeline mechanism between your ec2 instances and ELB.!!
+
+______
+
+Target Group : Each target group is used to route requests to one or more registered targets. When you create each listener rule, you specify a target group and conditions. When a rule condition is met, traffic is forwarded to the corresponding target group.
+
+Application ELB : http and https
+
+Application Load balancing algorithm : 
+--> Round robin
+--> Least outstanding requests
+
+--> We cannot assign a dedicated IP address for our Application ELB.
+
+Network ELB : TCP.. 
+--> Flow Hash algorithm.
+--> We CAN assign a dedicated IP address for our network ELB.
+
+Application LB Supports path based routing, also supports Microservices.
+
+millions req/sec : NLB
+
+ELB Access Logs : Logging on ELB. Destination is s3.
+
+Task : Practice Network ELB with multiple TGs. (80, 8080, 8888)
+_______________________
+
+Task : Launch multiple webservers in Multiple AZs... COnfigure the Classic ELB. 
+Task : Practice application ELB with multiple TGs. (80, 8080, 8888)
+
+
+
+
+
+
+
+
