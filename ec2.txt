@@ -622,6 +622,109 @@ _______________________
 Task : Launch multiple webservers in Multiple AZs... COnfigure the Classic ELB. 
 Task : Practice application ELB with multiple TGs. (80, 8080, 8888)
 
+___________________________________________________________________________________
+
+Cloudwatch : Monitoring Service. 
+--> By default, CW will be enabled with Basic Monitoring. 
+--> We can monitor CPU, Network, Disk perf (iops), status checks.
+--> We cannot monitor MEMORY (RAM) utilisation with Default metrics.
+--> We need to depend on Custom metrics by installing CW agent in ec2 instance.
+
+--> Basic Monitoring : 5 Minutes : Free Tier Eligible
+--> Detailed Monitoring : 1 Minute : Cost us
+______
+
+Event Bridge : 
+
+{"version":"0","id":"486ad25c-f937-bcd9-072f-7334be0e0891","detail-type":"EC2 Instance State-change Notification","source":"aws.ec2","account":"501170964283","time":"2022-03-11T04:48:58Z","region":"ap-south-1","resources":["arn:aws:ec2:ap-south-1:501170964283:instance/i-08a3b824c19f9fe1f"],"detail":{"instance-id":"i-08a3b824c19f9fe1f","state":"stopped"}}
+
+Sample Event : 
+
+INPUT PATH:
+
+{"instance-id":"$.detail.instance-id", "state":"$.detail.state", "time":"$.time", "region":"$.region", "account":"$.account"}
+
+INPUT TEMPLATE: 
+
+"At <time>, Status of your EC2 instance <instance-id> in the AWS Region <region> has changed to <state>."
+
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+
+
+Task : Make ec2 instance as webserver using "Userdata"
+
+Task 2: Use task1 Ec2 instance, alarm to stop instance if cpu utiliation is below 10% for 10 minutes and you should get notification when instance stopped.
+
+Task 3 : Create Eventbridge to take a volume snapshot everyday at 09:00 AM IST. You shuld get alert when this invocation happend.  
+
+
+High utilisations : bees with machine guns
+
+_________________________________________________________________________________________
+
+D: 14/03/2022
+
+ASG : Auto Scaling Group : 
+
+--> DYnamic (Step/Simple) Load 
+--> Scheduled scaling : 
+--> Manual : 
+
+1. Create a Golden AMI
+2. Create an ELB (Empty LB)
+3. Create an ASG
+	3.1 Create a Launch configuration / Launch template (WHat settings instance)
+	3.2 Configure the ASG (When to scale/ Desired count)
+
+
+ScaleIN : Remove the instance from ASG
+ScaleOut : Add the instances to ASG.
+
+How ASG will choose the instance to terminate if any ScaleIN action triggered..!! 
+
+ASG Termination policy : refer to the image.
+
+
+t2.micro --> Current configuration.. 
+t2.nano..??? How you can do this with 0 downtime..!! 
+
+
+Create a new launch configuration/template.. Associate this with ASG. Terminate the existing instance.. Now new instance will come with updated launch config settings.
+(Set Desired capacity to 2)..!!! 
+
+
+Task : 
+Create an ASG with a V1 Launch config.. Launch with Desired capacity as 2.. Test it.. 
+
+Configure Alarm to set Desired capacity as 1, when cpu utilisation is <10. 
+
+Configure scheduled scaling to set DC as 3 instance at specific time and test it. 
+
+
+________
+
+1 : Create a Golden AMI
+2 : Create a ELB
+3 : Create a Launch COnfig
+4 : Create an ASG with Fixed (2) and test it
+5 : Confiure Scheduled scaling 
+6 : Configure Simple scaling
+7 : Configure Versions for Launch config. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
