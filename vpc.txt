@@ -152,13 +152,12 @@ Task : Create a VPC with 4 Subnets. (2 Public SUbnets and 2 Private Subnets)
 2 Public SUbnets (ap-south-1a, ap-south-1b)
 2 Private SUbnets (ap-south-1a, ap-south-1b)
 
-
 Task 2 : draw.io website and design this diagram.
 https://app.diagrams.net/?splash=0&libs=aws4
-_________
 
+____________________________________________________________________________________
 
-______________________
+D: 22/03/2022
 
 Enable Logging on VPC : 
 Flow Logs: We can enable flowlogs at 
@@ -168,9 +167,56 @@ Flow Logs: We can enable flowlogs at
 
 We can choose destination as 1. S3 bucket 2. Cloudwatch Logs groups.
 
+_____________
+
+NACL : Network Access Control List : We can allow/deny traffic at Subnet level/AZ level using this NACLs.
+--> We need to takes care about the inbound rules and outbound rules.
+--> one subnet can be member of one NACL at a time.
+
+--> Default NACLs, : all subnets member of this. It allows all the traffic.
+--> New NACLs won't allow any traffic, Defaultly deny everything.  
+
+--> Ephemeral ports / Temporary ports need to opened in NACL. 
+https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html#nacl-ephemeral-ports
+
+--> Lowest rule number will have highest permissions. 
+
+_________________
+
+
+VPC Peering : Allow us to enable communication between multiple VPCs. (Same region, DIff region, Diff AWS accout VPCs)
+
+--> Requester VPC and Accepter VPC should not have same CIDR range.
+--> VPC Peering is non transitive peering. 
+--> Update both the VPCs route tables with Another VPC CIDR blocks via Peering connection. 
+
+			Requester VPC (mumbai)				Accepeter VPC (Singapore)
+VPC CIDR	192.168.0.0/16						172.31.0.0/16
+VPC ID		vpc-04c410bb3abaf7d2c				vpc-51dd1137
+Region		ap-south-1							ap-southeast-1
+ACC ID		501170964283							501170964283
+
+
+8 Subnets in environment : 2 Public, 2 application (private), 2 Lambda (private), 2 Database/data (private)
+
+______________________________
+
+Endpoints : Private Links : It provides private connectivity to the resources. If we have any requirement, s3 rwquests/dynamodb req should not flow over the internet. 
+
+NAT Gateway Works with IPv4. 
+If our VPC is configured to use IPv6, Instead of NAT Gateway, We use "Egress Only Internet Gateways".
+
+
+Can we associate multiple CIDRs for our VPC.
+Yes.. 
 
 
 
+VPN Connectivity (openvpn): https://www.youtube.com/watch?v=JSTyjISscNg
+Transit Gateway : https://www.youtube.com/watch?v=xyLlMBHy2wc
+
+
+We dont have session 23rd and 24th..!!!! Nexy Session is on 25th.
 
 
 
