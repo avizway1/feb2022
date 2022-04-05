@@ -111,6 +111,7 @@ https://github.com/aws/aws-sdk-js-v3#getting-started
 https://www.youtube.com/watch?v=rtI26X6FJX0&list=PLneBjIzDLECkdgoinrTO7D519zgPEmcte
 _____________________________________________________________________________________
 
+D: 05/04/2022
 
 Codecommit
 CodeDeploy
@@ -130,9 +131,9 @@ git pull
 
 Task : With shared code, perform CICD deployment.
 
+https://www.youtube.com/watch?v=rtI26X6FJX0&list=PLneBjIzDLECkdgoinrTO7D519zgPEmcte
+
 ________________
-
-
 
 ECR : Elastic Containers Repository : Place to store container images.
 ECS : Elastic Container Service : 
@@ -146,7 +147,6 @@ ECR Commands :
 
 Fargate : Fully managed by AWS. No backend instance, AWS manages everything.
 EC2 : we will get an instance, COnstainers runs within instance, We can login and perform os level operations.
-
 
 Task Defination : Task definitions specify the container information for your application, such as how many containers are part of your task, what resources they will use, how they are linked together, and which host ports they will use.
 
