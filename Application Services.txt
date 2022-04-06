@@ -162,7 +162,7 @@ https://ecsworkshop.com/
 https://www.youtube.com/containersfromthecouch
 https://kodekloud.com/courses/docker-for-the-absolute-beginner/
 
-______
+_________________________________
 
 AWS Organisations along with SSO: 
 
@@ -182,11 +182,5 @@ Switch role : https://www.youtube.com/watch?v=sZiiB4yF0VY
 https://aws.amazon.com/certification/
 
 
-https://ecsworkshop.com/
-https://www.eksworkshop.com/
-https://www.youtube.com/containersfromthecouch
-
-
-
-
+https://signin.aws.amazon.com/switchrole?roleName=AvinashRole&account=rajumcloud
 
